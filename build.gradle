@@ -1,0 +1,64 @@
+plugins {
+    id "org.wisepersist.gwt" version "1.1.11"
+}
+apply plugin: "java"
+if(project.gradle.startParameter.taskNames.contains("gwtDev")) {
+    apply plugin: "war"
+    apply plugin: "gwt"
+    gwt.modules "net.sayaya.Test"
+    sourceSets.main.java.srcDirs += 'src/test/java'
+} else {
+    apply plugin: "gwt-base"
+    if(project.gradle.startParameter.taskNames.contains("install")) {
+        apply plugin: "maven"
+    }
+}
+
+group "net.sayaya"
+version "1.0"
+[compileJava, compileTestJava]*.options*.encoding = "UTF-8"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+dependencies {
+    implementation("org.jboss.elemento:elemento-core:${elementoVersion}")
+    implementation("com.google.gwt:gwt-user:${gwtVersion}")
+    implementation("com.google.gwt:gwt-dev:${gwtVersion}")
+    implementation("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
+    testCompileOnly("org.projectlombok:lombok:1.18.20")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.20")
+}
+gwt {
+    gwtVersion = "${gwtVersion}"
+    minHeapSize = "1024M"
+    maxHeapSize = "2048M"
+    jsInteropExports.setGenerate(true)
+    compiler {
+        localWorkers = 12
+        disableClassMetadata = true
+        disableCastChecking = true
+    }
+}
+ext {
+    lombok = project.configurations.annotationProcessor.find { it.name.startsWith("lombok") }
+}
+if(project.gradle.startParameter.taskNames.contains("gwtDev")) {
+    gwtDev {
+        jvmArgs "-XX:ReservedCodeCacheSize=512M","-javaagent:${lombok}=ECJ"
+        port 9684
+        war file("src/test/webapp")
+    }
+} else {
+    jar {
+        from sourceSets.main.allSource
+        archiveName "sayaya-${archivesBaseName}.jar"
+    }
+}
+compileGwt {
+    minHeapSize = "2048M"
+    maxHeapSize = "4096M"
+    jvmArgs "-XX:ReservedCodeCacheSize=512M","-Xss2M","-javaagent:${lombok}=ECJ","-generateJsInteropExport"
+}
