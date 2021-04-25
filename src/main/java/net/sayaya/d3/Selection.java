@@ -1,7 +1,10 @@
-package net.sayaya.graph;
+package net.sayaya.d3;
 
 import elemental2.dom.Element;
+import elemental2.dom.HTMLElement;
 import jsinterop.annotations.*;
+
+import javax.swing.text.html.HTML;
 
 @JsType(namespace = JsPackage.GLOBAL)
 public class Selection extends D3 {
@@ -14,5 +17,7 @@ public class Selection extends D3 {
 	public native Selection call(D3 obj);
 	// public native Selection call(Function<Object, Object> func);
 	public native Selection data(Bin[] bins);
-	public native Element node();
+	public native void remove();
+	public native Selection clone();
+	public native HTMLElement node();
 }

@@ -1,11 +1,14 @@
 package net.sayaya.graph;
 
 import com.google.gwt.core.client.EntryPoint;
-import elemental2.core.JsArray;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.HTMLDivElement;
 import jsinterop.base.Js;
-import net.sayaya.graph.scale.Scale;
+import net.sayaya.d3.Axis;
+import net.sayaya.d3.Bin;
+import net.sayaya.d3.D3;
+import net.sayaya.d3.Selection;
+import net.sayaya.d3.scale.Scale;
 import org.jboss.elemento.Elements;
 import org.jboss.elemento.HtmlContentBuilder;
 
@@ -51,7 +54,7 @@ public class Test implements EntryPoint {
 					.attr("y",  (D3.Function<Object, Double>) bin -> (Double)y.call(y,  Js.asArray(bin).length))
 					.attr("height",  (D3.Function<Object, Double>) bin ->(Double)y.call(y, 0) -  (Double)y.call(y, Js.asArray(bin).length));
 		Axis xAxis = D3.axisBottom(x).ticks(width / tick).tickSizeOuter(0);
-
+		Axis yAxis = D3.axisLeft(y).ticks(height / 40);
 		svg.append("g")
 				.attr("transform", "translate(0, " + (height - marginBottom) + ")")
 				.call(xAxis)
@@ -62,7 +65,15 @@ public class Test implements EntryPoint {
 					.attr("font-weight", "bold")
 					.attr("text-anchor", "end")
 					.text("Unemployment (%)");
-
+		svg.append("g")
+		   .attr("transform", "translate(" + marginLeft + ", 0)")
+		   .call(yAxis)
+		   .selectAll(".tick:last-of-type text").clone()
+			   .attr("x", 4)
+			   .attr("font-weight", "bold")
+			   .attr("text-anchor", "start")
+			   .text("Counties")
+		   .selectAll(".domain").remove();
 		content.add(svg.node());
 
 	}

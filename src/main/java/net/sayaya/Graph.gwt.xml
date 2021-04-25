@@ -2,6 +2,7 @@
 <module>
 	<inherits name="com.google.gwt.user.User"/>
 	<inherits name="org.jboss.elemento.Core"/>
+	<source path="d3"/>
 	<source path="graph"/>
 	<collapse-all-properties/>
 </module>

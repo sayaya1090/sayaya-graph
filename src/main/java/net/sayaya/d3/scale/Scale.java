@@ -1,8 +1,9 @@
-package net.sayaya.graph.scale;
+package net.sayaya.d3.scale;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType(namespace = JsPackage.GLOBAL)
-public final class ScaleSequential {
+public class Scale {
+	public native Object call(Scale _this, Object c);
 }

@@ -1,11 +1,8 @@
-package net.sayaya.graph;
+package net.sayaya.d3.scale;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType(namespace = JsPackage.GLOBAL)
-public class Color {
-	public double h;
-	public double s;
-	public double opacity;
+public final class ScaleSequential {
 }

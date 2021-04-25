@@ -1,8 +1,8 @@
-package net.sayaya.graph;
+package net.sayaya.d3;
 
 import elemental2.dom.Element;
 import jsinterop.annotations.*;
-import net.sayaya.graph.scale.*;
+import net.sayaya.d3.scale.*;
 
 @JsType(namespace = JsPackage.GLOBAL, name="d3")
 public class D3 {

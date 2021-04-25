@@ -1,8 +1,11 @@
-package net.sayaya.graph.scale;
+package net.sayaya.d3;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType(namespace = JsPackage.GLOBAL)
-public final class ScalePow {
+public class Color {
+	public double h;
+	public double s;
+	public double opacity;
 }
