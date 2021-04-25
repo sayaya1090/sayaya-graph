@@ -4,7 +4,7 @@ import elemental2.dom.Element;
 import jsinterop.annotations.*;
 import net.sayaya.d3.scale.*;
 
-@JsType(namespace = JsPackage.GLOBAL, name="d3")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name="d3")
 public class D3 {
 	public static native Selection create(String tag);
 	public static native Selection select(Element elem);
@@ -23,7 +23,7 @@ public class D3 {
 	public static native Object min(Object[] objs);
 	public static native Object min(Object[] objs, Function<?, ?> func);
 
-	public static native Color color(String color);
+	//public static native Color color(String color);
 	@FunctionalInterface
 	@JsFunction
 	public interface Function<T, U> {

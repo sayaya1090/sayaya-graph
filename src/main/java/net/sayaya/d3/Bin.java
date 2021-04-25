@@ -4,16 +4,12 @@ import elemental2.core.JsArray;
 import jsinterop.annotations.*;
 import jsinterop.base.Js;
 
-@JsType(namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
 public class Bin extends JsArray<Object> {
+	public Double x0;
+	public Double x1;
 	public native ThresholdFunction thresholds(int size);
 	public native ThresholdFunction thresholds(Double[] thresholds);
-	public static Object x0(Object bin) {
-		return Js.asPropertyMap(bin).get("x0");
-	}
-	public static Object x1(Object bin) {
-		return Js.asPropertyMap(bin).get("x1");
-	}
 
 	@FunctionalInterface
 	@JsFunction

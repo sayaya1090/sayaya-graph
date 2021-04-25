@@ -3,8 +3,8 @@ package net.sayaya.d3;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType(namespace = JsPackage.GLOBAL)
-public class Axis extends D3 {
+@JsType(isNative = true, namespace = JsPackage.GLOBAL)
+public final class Axis extends D3 {
 	public native Axis ticks(double tick);
 	public native Axis tickSize(double tick);
 	public native Axis tickArguments(Object arg);

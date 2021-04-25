@@ -27,54 +27,7 @@ public class Test implements EntryPoint {
 		DomGlobal.console.log(D3.max(new Double[] {1.0, 2.0}));
 	}
 	private void testHistogram() {
-		int width = 300;
-		int height = 250;
-		int marginTop = 20;
-		int marginBottom = 30;
-		int marginLeft = 40;
-		int marginRight = 20;
-		int tick = 40;
 		Double[] data = new Double[] {5.1, 4.9, 8.6, 6.2, 5.1, 7.1, 6.7, 6.1, 5.0, 5.0, 5.2, 7.9, 11.1, 5.9, 5.5, 5.6, 6.5, 7.7, 5.7, 6.7};
-		String color = "steelblue";
-		Selection svg = D3.create("svg").attr("viewBox", new Object[]{0, 0, width*5, height*5});
-		Bin[] bins = D3.bin().thresholds(tick).apply(data);
-		Scale x = D3.scaleLinear()
-				.domain(new Object[] {Bin.x0(bins[0]), Bin.x1(bins[bins.length-1])})
-				.range(new Object[]{marginLeft, width-marginRight});
-		Scale y = D3.scaleLinear()
-				.domain(new Object[] {0, D3.max(bins, bin->Js.asArray(bin).length)}).nice()
-				.range(new Object[]{height-marginBottom, marginTop});
-
-		svg.append("g").attr("fill", color)
-				.selectAll("rect")
-				.data(bins)
-				.join("rect")
-					.attr("x", (D3.Function<Object, Double>) bin -> 1.0 + (Double)x.call(x, Bin.x1(bin)))
-					.attr("width", (D3.Function<Object, Double>) bin -> Math.max(0, (Double)x.call(x, Bin.x1(bin))-(Double)x.call(x, Bin.x0(bin))-1))
-					.attr("y",  (D3.Function<Object, Double>) bin -> (Double)y.call(y,  Js.asArray(bin).length))
-					.attr("height",  (D3.Function<Object, Double>) bin ->(Double)y.call(y, 0) -  (Double)y.call(y, Js.asArray(bin).length));
-		Axis xAxis = D3.axisBottom(x).ticks(width / tick).tickSizeOuter(0);
-		Axis yAxis = D3.axisLeft(y).ticks(height / 40);
-		svg.append("g")
-				.attr("transform", "translate(0, " + (height - marginBottom) + ")")
-				.call(xAxis)
-				.append("text")
-					.attr("x", width - marginRight)
-					.attr("y", -4)
-					.attr("fill", "currentColor")
-					.attr("font-weight", "bold")
-					.attr("text-anchor", "end")
-					.text("Unemployment (%)");
-		svg.append("g")
-		   .attr("transform", "translate(" + marginLeft + ", 0)")
-		   .call(yAxis)
-		   .selectAll(".tick:last-of-type text").clone()
-			   .attr("x", 4)
-			   .attr("font-weight", "bold")
-			   .attr("text-anchor", "start")
-			   .text("Counties")
-		   .selectAll(".domain").remove();
-		content.add(svg.node());
-
+		content.add(HistogramElement.build(300, 250).data(data));
 	}
 }
