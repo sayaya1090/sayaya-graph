@@ -21,6 +21,7 @@ public class Test implements EntryPoint {
 		Elements.body().add(content);
 		testFunction();
 		testHistogram();
+		testStackedNormalizedHorizontalBarChart();
 	}
 
 	private void testFunction() {
@@ -29,5 +30,8 @@ public class Test implements EntryPoint {
 	private void testHistogram() {
 		Double[] data = new Double[] {5.1, 4.9, 8.6, 6.2, 5.1, 7.1, 6.7, 6.1, 5.0, 5.0, 5.2, 7.9, 11.1, 5.9, 5.5, 5.6, 6.5, 7.7, 5.7, 6.7};
 		content.add(HistogramElement.build(300, 250).data(data));
+	}
+	private void testStackedNormalizedHorizontalBarChart() {
+		content.add(StackedNormalizedHorizontalBarChartElement.build(300, 250));
 	}
 }

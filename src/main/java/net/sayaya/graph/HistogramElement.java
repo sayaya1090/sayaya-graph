@@ -31,7 +31,7 @@ public class HistogramElement implements IsElement<HTMLElement> {
 	private HistogramElement(int width, int height) {
 		this.width = width;
 		this.height = height;
-		svg = D3.create("svg").attr("viewBox", new Object[]{0, 0, width*5, height*5});
+		svg = D3.create("svg").attr("width", width).attr("height", height).attr("viewBox", new Object[]{0, 0, width, height});
 		content = svg.append("g").attr("fill", color);
 		bottom = svg.append("g").attr("transform", "translate(0, " + (height - marginBottom) + ")");
 		left = svg.append("g").attr("transform", "translate(" + marginLeft + ", 0)");

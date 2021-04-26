@@ -4,6 +4,8 @@ import elemental2.dom.Element;
 import jsinterop.annotations.*;
 import net.sayaya.d3.scale.*;
 
+import java.util.function.BiFunction;
+
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="d3")
 public class D3 {
 	public static native Selection create(String tag);
@@ -22,6 +24,9 @@ public class D3 {
 	public static native Object max(Object[] objs, Function<?, ?> func);
 	public static native Object min(Object[] objs);
 	public static native Object min(Object[] objs, Function<?, ?> func);
+	public static native Object sum(Object[] objs);
+	public static native Object sum(Object[] objs, Function<?, ?> func);
+	public static native Object sort(BiFunction<?, ?, ?> func);
 
 	//public static native Color color(String color);
 	@FunctionalInterface
