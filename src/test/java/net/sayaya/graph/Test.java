@@ -12,6 +12,8 @@ import net.sayaya.d3.scale.Scale;
 import org.jboss.elemento.Elements;
 import org.jboss.elemento.HtmlContentBuilder;
 
+import java.util.List;
+
 import static org.jboss.elemento.Elements.div;
 
 public class Test implements EntryPoint {
@@ -32,6 +34,11 @@ public class Test implements EntryPoint {
 		content.add(HistogramElement.build(300, 250).data(data));
 	}
 	private void testStackedNormalizedHorizontalBarChart() {
-		content.add(StackedNormalizedHorizontalBarChartElement.build(300, 250));
+		List<StackedNormalizedHorizontalBarChartElement.Series> data = List.of(
+				new StackedNormalizedHorizontalBarChartElement.Series().label("A"),
+				new StackedNormalizedHorizontalBarChartElement.Series().label("B"),
+				new StackedNormalizedHorizontalBarChartElement.Series().label("C")
+		);
+		content.add(StackedNormalizedHorizontalBarChartElement.build(300, 250).values(data));
 	}
 }
